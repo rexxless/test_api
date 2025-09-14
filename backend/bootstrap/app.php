@@ -1,5 +1,6 @@
 <?php
 
+use Illuminate\Auth\AuthenticationException;
 use Illuminate\Foundation\Application;
 use Illuminate\Foundation\Configuration\Exceptions;
 use Illuminate\Foundation\Configuration\Middleware;
@@ -32,5 +33,10 @@ return Application::configure(basePath: dirname(__DIR__))
                 ], 404);
             }
             return null;
+        });
+        $exceptions->renderable(function (AuthenticationException $e, $request) {
+            return response()->json([
+                'message' => 'Доступно только для авторизованных пользователей.',
+            ], 401);
         });
     })->create();
