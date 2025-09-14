@@ -1,8 +1,8 @@
 # Инструкции по запуску
 Перед первым запуском скопируйте в терминал следующее:
 ```shell
-git clone https://github.com/rexxless/testapi.git
-cd testapi/backend
+git clone https://github.com/rexxless/test_api.git
+cd test_api/backend
 cp .env.example .env
 # Далее, редактируйте .env для вашего проекта
 ```
@@ -25,7 +25,7 @@ docker exec backend php artisan db:seed
 
 Для всех последующих запусков достаточно скопировать в терминал следующее:
 ```shell
-cd testapi/deploy
+cd test_api/deploy
 docker-compose up -d
 ```
 
@@ -51,3 +51,4 @@ docker-compose up -d
 Админ:
 * Почта: admin@example.com
 * Пароль: QWEasd123
+
