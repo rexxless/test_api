@@ -2,7 +2,7 @@ FROM php:8.2-fpm-alpine
 
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
 
-RUN apk update && apk add --no-cache \
+RUN apk add --no-cache \
     bash \
     git \
     curl \
@@ -21,10 +21,6 @@ RUN apk update && apk add --no-cache \
     jpeg-dev \
     nano \
     vim \
-    re2c \
-    file \
-    dpkg-dev \
-    dpkg
 
 RUN docker-php-ext-install \
     pdo \
@@ -37,11 +33,8 @@ RUN docker-php-ext-install \
     intl \
     opcache
 
-# Install Redis PHP extension
-RUN pecl install redis && docker-php-ext-enable redis
 
-# Clean up package cache and temporary files
-RUN rm -rf /var/cache/apk/* /tmp/* /var/tmp/*
+RUN rm -rf /var/cache/apk/*
 
 WORKDIR /var/www
 
