@@ -47,6 +47,7 @@ class StoreUserRequest extends FormRequest
     {
         return [
             'email.required' => 'Поле "email" обязательно для заполнения.',
+            'email.unique' => 'Аккаунт с таким email уже существует',
             'email.string' => 'Поле "email" должно быть строкой.',
             'email.regex' => 'Поле "email" должно содержать корректный email адрес.',
             'email.max' => 'Поле "email" не должно превышать 255 символов.',
