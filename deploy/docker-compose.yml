@@ -4,9 +4,10 @@ services:
       context: ../
       dockerfile: deploy/php/Dockerfile
     container_name: backend
+    user: "1000:1000"
     restart: always
     volumes:
-      - ../backend:/var/www
+      - ../backend/storage:/var/www/storage
     depends_on:
       postgres:
         condition: service_healthy
