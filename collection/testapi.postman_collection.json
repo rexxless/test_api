@@ -2,6 +2,7 @@
 	"info": {
 		"_postman_id": "851b9ab1-f87a-41f4-9a36-2bc98463223e",
 		"name": "testapi",
+		"description": "## Возможные ошибки:\n\n- 404 - Страница не найдена\n    \n- 403 - Доступ запрещен\n    \n- 401 - Доступно только авторизованному пользователю",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
 		"_exporter_id": "43464435",
 		"_collection_link": "https://remfan.postman.co/workspace/84afd3c0-6182-45c4-80ab-5adb53c23411/collection/43464435-851b9ab1-f87a-41f4-9a36-2bc98463223e?action=share&source=collection_link&creator=43464435"
@@ -9,10 +10,108 @@
 	"item": [
 		{
 			"name": "Гость",
-			"item": []
+			"item": [
+				{
+					"name": "Регистрация",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "email",
+									"value": "tester@example.com",
+									"type": "text"
+								},
+								{
+									"key": "password",
+									"value": "password1",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{host}}/api/register",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"register"
+							]
+						},
+						"description": "| Ключ | Тип | **Валидация** |\n| --- | --- | --- |\n| email | email | Обязательно для заполнения  <br>Тип email ([XXX@XXX.XX](https://mailto:XXX@XXX.XX))  <br>Макс. длина: 255 |\n| password | str | Обязательно для заполнения  <br>Макс длина: 100  <br>Мин. длина: 8 |\n\n### Ответ в случае успеха:\n\n``` json\n{\n    \"access_token\": \"access_token_here\"\n}\n\n ```"
+					},
+					"response": []
+				},
+				{
+					"name": "Логин",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "email",
+									"value": "user@example.com",
+									"type": "text"
+								},
+								{
+									"key": "password",
+									"value": "password",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{host}}/api/login",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"login"
+							]
+						},
+						"description": "| Ключ | Тип | **Валидация** |\n| --- | --- | --- |\n| email | email | Обязательно для заполнения  <br>Тип email ([XXX@XXX.XX](https://mailto:XXX@XXX.XX))  <br>Макс. длина: 255 |\n| password | str | Обязательно для заполнения  <br>Макс длина: 100 |\n\n### Ответ в случае успеха:\n\n``` json\n{\n    \"access_token\": \"access_token_here\"\n}\n\n ```"
+					},
+					"response": []
+				}
+			],
+			"description": "### Запросы, которые доступны без авторизации"
 		},
 		{
-			"name": "Пользователь (В т.ч. админ)",
+			"name": "Пользователь",
 			"item": [
 				{
 					"name": "Список отелей",
@@ -49,7 +148,8 @@
 								"api",
 								"hotels"
 							]
-						}
+						},
+						"description": "### Пример ответа:\n\n``` json\n[\n    {\n        \"id\": 1,\n        \"name\": \"Отель \\\"minima\\\"\",\n        \"description\": \"Виноват разве я, что не только за нее примутся теперь маменьки и тетушки. В один мешочек отбирают всё целковики, в другой раз громче и ближе, и дождь хлынул вдруг как из ведра. Сначала, принявши.\",\n        \"city\": \"Красногорск\",\n        \"website\": \"http://novikov.ru/in-mollitia-suscipit-nostrum\"\n    },\n    {\n        \"id\": 2,\n        \"name\": \"Отель \\\"voluptatibus\\\"\",\n        \"description\": \"Есть из чего это все народ мертвый. Мертвым телом хоть забор подпирай, — говорит пословица. — Да, — примолвил Манилов, — у борова, вся спина и бок в грязи! где так изволил засалиться? — Еще — третью.\",\n        \"city\": \"Павловский Посад\",\n        \"website\": \"http://www.semenova.ru/laboriosam-nemo-voluptatum-laudantium-laudantium-voluptates\"\n    },\n    {\n        \"id\": 3,\n        \"name\": \"Отель \\\"dignissimos\\\"\",\n        \"description\": \"Но знаете ли, что мало подарков получил на свадьбе, — словом, — любо было глядеть. — Дай бог, чтобы прошло. Я-то смазывала свиным салом и скипидаром тоже — смачивала. А с чем прихлебаете чайку? Во.\",\n        \"city\": \"Ступино\",\n        \"website\": \"http://www.voroncov.ru/sed-earum-ut-ut-corporis-dolores\"\n    }\n]\n\n ```"
 					},
 					"response": []
 				},
@@ -89,7 +189,8 @@
 								"hotels",
 								"{{hotel}}"
 							]
-						}
+						},
+						"description": "<h3>Параметры:</h3>\n\nПринимает id отеля в {{hotel}}\n\n<h3>Пример ответа:</h3>\n\n``` json\n[\n    {\n        \"id\": 1,\n        \"name\": \"Отель \\\"minima\\\"\",\n        \"description\": \"Виноват разве я, что не только за нее примутся теперь маменьки и тетушки. В один мешочек отбирают всё целковики, в другой раз громче и ближе, и дождь хлынул вдруг как из ведра. Сначала, принявши.\",\n        \"city\": \"Красногорск\",\n        \"website\": \"http://novikov.ru/in-mollitia-suscipit-nostrum\"\n    }\n]\n\n ```"
 					},
 					"response": []
 				},
@@ -128,405 +229,200 @@
 								"api",
 								"logout"
 							]
-						}
+						},
+						"description": "### Пример ответа:\n\n``` json\n{\n    \"message\": \"Вы успешно вышли из аккаунта.\"\n}\n\n ```"
 					},
 					"response": []
 				}
-			]
+			],
+			"description": "### Запросы, которые доступны авторизованному пользователю (в т.ч. админу)"
 		},
 		{
 			"name": "Админ",
-			"item": []
-		},
-		{
-			"name": "Регистрация",
-			"request": {
-				"auth": {
-					"type": "noauth"
-				},
-				"method": "POST",
-				"header": [
-					{
-						"key": "Accept",
-						"value": "application/json",
-						"type": "text"
-					},
-					{
-						"key": "Content-Type",
-						"value": "application/json",
-						"type": "text"
-					}
-				],
-				"body": {
-					"mode": "formdata",
-					"formdata": [
-						{
-							"key": "email",
-							"value": "tester@example.com",
-							"type": "text"
+			"item": [
+				{
+					"name": "Создать отель",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "",
+									"type": "string"
+								}
+							]
 						},
-						{
-							"key": "password",
-							"value": "password1",
-							"type": "text"
-						}
-					]
-				},
-				"url": {
-					"raw": "{{host}}/api/register",
-					"host": [
-						"{{host}}"
-					],
-					"path": [
-						"api",
-						"register"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "Логин",
-			"request": {
-				"auth": {
-					"type": "noauth"
-				},
-				"method": "POST",
-				"header": [
-					{
-						"key": "Accept",
-						"value": "application/json",
-						"type": "text"
-					},
-					{
-						"key": "Content-Type",
-						"value": "application/json",
-						"type": "text"
-					}
-				],
-				"body": {
-					"mode": "formdata",
-					"formdata": [
-						{
-							"key": "email",
-							"value": "user@example.com",
-							"type": "text"
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "name",
+									"value": "",
+									"type": "text"
+								},
+								{
+									"key": "description",
+									"value": "",
+									"description": "Nullable",
+									"type": "text"
+								},
+								{
+									"key": "city",
+									"value": "",
+									"type": "text"
+								},
+								{
+									"key": "website",
+									"value": "",
+									"type": "text"
+								}
+							]
 						},
-						{
-							"key": "password",
-							"value": "password",
-							"type": "text"
-						}
-					]
-				},
-				"url": {
-					"raw": "{{host}}/api/login",
-					"host": [
-						"{{host}}"
-					],
-					"path": [
-						"api",
-						"login"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "Список отелей",
-			"request": {
-				"auth": {
-					"type": "bearer",
-					"bearer": [
-						{
-							"key": "token",
-							"value": "",
-							"type": "string"
-						}
-					]
-				},
-				"method": "GET",
-				"header": [
-					{
-						"key": "Accept",
-						"value": "application/json",
-						"type": "text"
-					},
-					{
-						"key": "Content-Type",
-						"value": "application/json",
-						"type": "text"
-					}
-				],
-				"url": {
-					"raw": "{{host}}/api/hotels",
-					"host": [
-						"{{host}}"
-					],
-					"path": [
-						"api",
-						"hotels"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "Конкретный отель",
-			"request": {
-				"auth": {
-					"type": "bearer",
-					"bearer": [
-						{
-							"key": "token",
-							"value": "",
-							"type": "string"
-						}
-					]
-				},
-				"method": "GET",
-				"header": [
-					{
-						"key": "Accept",
-						"value": "application/json",
-						"type": "text"
-					},
-					{
-						"key": "Content-Type",
-						"value": "application/json",
-						"type": "text"
-					}
-				],
-				"url": {
-					"raw": "{{host}}/api/hotels/{{hotel}}",
-					"host": [
-						"{{host}}"
-					],
-					"path": [
-						"api",
-						"hotels",
-						"{{hotel}}"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "Выход",
-			"request": {
-				"auth": {
-					"type": "bearer",
-					"bearer": [
-						{
-							"key": "token",
-							"value": "",
-							"type": "string"
-						}
-					]
-				},
-				"method": "GET",
-				"header": [
-					{
-						"key": "Accept",
-						"value": "application/json",
-						"type": "text"
-					},
-					{
-						"key": "Content-Type",
-						"value": "application/json",
-						"type": "text"
-					}
-				],
-				"url": {
-					"raw": "{{host}}/api/logout",
-					"host": [
-						"{{host}}"
-					],
-					"path": [
-						"api",
-						"logout"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "Создать отель",
-			"request": {
-				"auth": {
-					"type": "bearer",
-					"bearer": [
-						{
-							"key": "token",
-							"value": "",
-							"type": "string"
-						}
-					]
-				},
-				"method": "POST",
-				"header": [
-					{
-						"key": "Accept",
-						"value": "application/json",
-						"type": "text"
-					},
-					{
-						"key": "Content-Type",
-						"value": "application/json",
-						"type": "text"
-					}
-				],
-				"body": {
-					"mode": "formdata",
-					"formdata": [
-						{
-							"key": "name",
-							"value": "",
-							"type": "text"
+						"url": {
+							"raw": "{{host}}/api/hotels",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"hotels"
+							],
+							"query": [
+								{
+									"key": "",
+									"value": null,
+									"disabled": true
+								}
+							]
 						},
-						{
-							"key": "description",
-							"value": "",
-							"description": "Nullable",
-							"type": "text"
-						},
-						{
-							"key": "city",
-							"value": "",
-							"type": "text"
-						},
-						{
-							"key": "website",
-							"value": "",
-							"type": "text"
-						}
-					]
-				},
-				"url": {
-					"raw": "{{host}}/api/hotels",
-					"host": [
-						"{{host}}"
-					],
-					"path": [
-						"api",
-						"hotels"
-					],
-					"query": [
-						{
-							"key": "",
-							"value": null,
-							"disabled": true
-						}
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "Удалить отель",
-			"request": {
-				"auth": {
-					"type": "bearer",
-					"bearer": [
-						{
-							"key": "token",
-							"value": "",
-							"type": "string"
-						}
-					]
-				},
-				"method": "DELETE",
-				"header": [
-					{
-						"key": "Accept",
-						"value": "application/json",
-						"type": "text"
+						"description": "| **Ключ** | **Тип** | **Правила валидации** |\n| --- | --- | --- |\n| name | str | Обязательно  <br>Макс. длина: 100 |\n| description | str | Необязательно  <br>Макс. длина: 255 |\n| city | str | Обязательно  <br>Макс. длина: 25 |\n| website | url | Обязательно  <br>Макс. длина: 255  <br>Тип url: [xxxxx://xxxxx.xxx/xxx](https://xxxxx://xxxxx.xxx/xxx) (формат ссылки) |\n\n### Пример ответа в случае успеха:\n\n``` json\n{\n    \"message\": \"Отель успешно добавлен.\"\n}\n\n ```"
 					},
-					{
-						"key": "Content-Type",
-						"value": "application/json",
-						"type": "text"
-					}
-				],
-				"url": {
-					"raw": "{{host}}/api/hotels/{{hotel}}",
-					"host": [
-						"{{host}}"
-					],
-					"path": [
-						"api",
-						"hotels",
-						"{{hotel}}"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "Обновить отель",
-			"request": {
-				"auth": {
-					"type": "bearer",
-					"bearer": [
-						{
-							"key": "token",
-							"value": "",
-							"type": "string"
-						}
-					]
+					"response": []
 				},
-				"method": "PATCH",
-				"header": [
-					{
-						"key": "Accept",
-						"value": "application/json",
-						"type": "text"
+				{
+					"name": "Обновить отель",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "name",
+									"value": "",
+									"type": "text"
+								},
+								{
+									"key": "description",
+									"value": "",
+									"description": "Nullable",
+									"type": "text"
+								},
+								{
+									"key": "city",
+									"value": "",
+									"type": "text"
+								},
+								{
+									"key": "website",
+									"value": "",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{host}}/api/hotels/{{hotel}}",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"hotels",
+								"{{hotel}}"
+							]
+						},
+						"description": "| **Ключ** | **Тип** | **Правила валидации** |\n| --- | --- | --- |\n| name | str | Макс. длина: 100 |\n| description | str | Макс. длина: 255 |\n| city | str | Макс. длина: 25 |\n| website | url | Макс. длина: 255  <br>Тип url: [xxxxx://xxxxx.xxx/xxx](https://xxxxx://xxxxx.xxx/xxx) (формат ссылки) |\n\n<h3>Параметры:</h3>\n\nПринимает id отеля в {{hotel}}\n\n### Пример ответа:\n\nВ случае успеха возвращает обновленный объект\n\n``` json\n{\n    \"message\": \"Данные успешно обновлены.\",\n    \"hotel\": {\n        \"id\": 3,\n        \"name\": \"Отель \\\"dignissimos\\\"\",\n        \"description\": \"Но знаете ли, что мало подарков получил на свадьбе, — словом, — любо было глядеть. — Дай бог, чтобы прошло. Я-то смазывала свиным салом и скипидаром тоже — смачивала. А с чем прихлебаете чайку? Во.\",\n        \"city\": \"Ступино\",\n        \"website\": \"http://www.voroncov.ru/sed-earum-ut-ut-corporis-dolores\"\n    }\n}\n\n ```"
 					},
-					{
-						"key": "Content-Type",
-						"value": "application/json",
-						"type": "text"
-					}
-				],
-				"body": {
-					"mode": "formdata",
-					"formdata": [
-						{
-							"key": "name",
-							"value": "",
-							"type": "text"
-						},
-						{
-							"key": "description",
-							"value": "",
-							"description": "Nullable",
-							"type": "text"
-						},
-						{
-							"key": "city",
-							"value": "",
-							"type": "text"
-						},
-						{
-							"key": "website",
-							"value": "",
-							"type": "text"
-						}
-					]
+					"response": []
 				},
-				"url": {
-					"raw": "{{host}}/api/hotels/{{hotel}}",
-					"host": [
-						"{{host}}"
-					],
-					"path": [
-						"api",
-						"hotels",
-						"{{hotel}}"
-					]
+				{
+					"name": "Удалить отель",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{host}}/api/hotels/{{hotel}}",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"hotels",
+								"{{hotel}}"
+							]
+						},
+						"description": "<h3>Параметры:</h3>\n\nПринимает id отеля в {{hotel}}\n\n### Пример ответа в случае успеха:\n\n``` json\n{\n    \"message\": \"Отель успешно удален.\"\n}\n\n ```"
+					},
+					"response": []
 				}
-			},
-			"response": []
+			],
+			"description": "### Запросы, которые может делать ТОЛЬКО админ"
 		}
 	]
 }
