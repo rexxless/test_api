@@ -19,6 +19,11 @@ docker exec backend php artisan migrate
 ```
 
 
+Для заполнения БД тестовыми данными необходимо ввести следующую команду:
+```shell
+docker exec backend php artisan db:seed
+```
+
 Для всех последующих запусков достаточно скопировать в терминал следующее:
 ```shell
 cd test_api/deploy
@@ -47,6 +52,7 @@ docker-compose up -d
 Админ:
 * Почта: admin@example.com
 * Пароль: QWEasd123
+
 
 
 
