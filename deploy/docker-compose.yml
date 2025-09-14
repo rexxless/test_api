@@ -5,7 +5,6 @@ services:
       dockerfile: deploy/php/Dockerfile
     container_name: backend
     restart: always
-    user: "1000:1000"
     volumes:
       - ../backend:/var/www
     depends_on:

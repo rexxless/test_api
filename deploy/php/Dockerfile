@@ -39,7 +39,8 @@ RUN rm -rf /var/cache/apk/*
 WORKDIR /var/www
 
 RUN mkdir -p storage/framework/{views,cache,sessions} storage/logs bootstrap/cache \
-    && chmod -R 777 storage bootstrap/cache
+    && chown -R www-data:www-data storage bootstrap/cache \
+    && chmod -R 775 storage bootstrap/cache
 
 EXPOSE 9000
 
