@@ -27,7 +27,6 @@ class LoginUserRequest extends FormRequest
                 'string',
                 'regex:/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9-]+\.[a-zA-Z]{2,}$/',
                 'max:255',
-                'exists:users,email'
             ],
             'password' => [
                 'required',
@@ -49,7 +48,6 @@ class LoginUserRequest extends FormRequest
             'email.string' => 'Поле "email" должно быть строкой.',
             'email.regex' => 'Поле "email" должно содержать корректный email адрес.',
             'email.max' => 'Поле "email" не должно превышать 255 символов.',
-            'email.exists' => 'Пользователь с указанным email не найден.',
             'password.required' => 'Поле "password" обязательно для заполнения.',
             'password.string' => 'Поле "password" должно быть строкой.',
             'password.max' => 'Поле "password" не должно превышать 100 символов.',
