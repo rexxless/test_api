@@ -20,7 +20,7 @@ RUN apk add --no-cache \
     libpng-dev \
     jpeg-dev \
     nano \
-    vim \
+    vim
 
 RUN docker-php-ext-install \
     pdo \
