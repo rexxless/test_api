@@ -17,7 +17,7 @@ class HotelFactory extends Factory
     public function definition(): array
     {
         return [
-            'name' => $this->faker->name() . " Hotel",
+            'name' => 'Отель "' . $this->faker->word() . '"',
             'city' => $this->faker->city(),
             'description' => $this->faker->realText(),
             'website' => $this->faker->url(),
